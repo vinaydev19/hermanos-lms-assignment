@@ -5,7 +5,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { Course } from "../models/course.model.js";
 import { User } from "../models/user.model.js";
 
-
 const createLecture = asyncHandler(async (req, res, next) => {
     const { course, instructor, date } = req.body;
 
