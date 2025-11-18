@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { verifyJWT } from "../middleware/auth.middleware.js";
-import { authorizeRoles } from "../middleware/role.middleware.js";
-import { upload } from "../middleware/upload.middleware.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { authorizeRoles } from "../middlewares/roles.middleware.js";
+import { upload } from "../middlewares/multer.middleware.js";
 import {
     createCourse,
     getAllCourses,
