@@ -38,10 +38,22 @@ const createLecture = asyncHandler(async (req, res, next) => {
 })
 
 const getAllLectures = asyncHandler(async (req, res, next) => {
-    const lectures = await Lecture.find().populate('course', "name level description").populate('instructor', "name email");
+    let filter = {};
 
-    return res.status(200).json(new ApiResponse(200, { lectures }, "Lectures retrieved successfully"));
-})
+    // If instructor is logged in, return only their lectures
+    if (req.user.role === "instructor") {
+        filter.instructor = req.user._id;
+    }
+
+    const lectures = await Lecture.find(filter)
+        .populate('course', "name level description")
+        .populate('instructor', "name email");
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, { lectures }, "Lectures retrieved successfully"));
+});
+
 
 const getLectureById = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
