@@ -4,7 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 const createInstructor = asyncHandler(async (req, res, next) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role = 'instructor' } = req.body;
 
     if ([name, email, password, role].some(field => !field || field.trim() === '')) {
         throw new ApiError(400, "All fields are required")
@@ -38,6 +38,8 @@ const getAllInstructors = asyncHandler(async (req, res, next) => {
 const updateInstructor = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
+    console.log("Updating instructor:", id, name, email, password);
+        
 
     if ([name, email, password].every(field =>
         field === undefined || field === null || field.toString().trim() === ''

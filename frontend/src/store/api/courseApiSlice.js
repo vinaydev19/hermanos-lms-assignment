@@ -1,0 +1,71 @@
+import { COURSES_URL } from "@/utils/constants";
+import { apiSlice } from "./apiSlice";
+
+export const courseApiSlice = apiSlice.injectEndpoints({
+    endpoints: (builder) => ({
+
+        // GET ALL COURSES
+        getCourses: builder.query({
+            query: () => COURSES_URL,
+            providesTags: (result) =>
+                result?.data?.courses
+                    ? [
+                        ...result.data.courses.map((c) => ({
+                            type: "Courses",
+                            id: c._id,
+                        })),
+                        { type: "Courses", id: "LIST" }
+                    ]
+                    : [{ type: "Courses", id: "LIST" }],
+        }),
+
+        // GET SINGLE
+        getCourseById: builder.query({
+            query: (id) => `${COURSES_URL}/${id}`,
+            providesTags: (r, e, id) => [{ type: "Courses", id }],
+        }),
+
+        // CREATE
+        createCourse: builder.mutation({
+            query: (formData) => ({
+                url: COURSES_URL,
+                method: "POST",
+                body: formData,
+            }),
+            invalidatesTags: [{ type: "Courses", id: "LIST" }],
+        }),
+
+        // UPDATE
+        updateCourse: builder.mutation({
+            query: ({ id, formData }) => ({
+                url: `${COURSES_URL}/${id}`,
+                method: "PUT",
+                body: formData,
+            }),
+            invalidatesTags: (r, e, { id }) => [
+                { type: "Courses", id },
+                { type: "Courses", id: "LIST" },
+            ],
+        }),
+
+        // DELETE
+        deleteCourse: builder.mutation({
+            query: (id) => ({
+                url: `${COURSES_URL}/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: (r, e, id) => [
+                { type: "Courses", id },
+                { type: "Courses", id: "LIST" },
+            ],
+        }),
+    }),
+});
+
+export const {
+    useGetCoursesQuery,
+    useGetCourseByIdQuery,
+    useCreateCourseMutation,
+    useUpdateCourseMutation,
+    useDeleteCourseMutation,
+} = courseApiSlice;
