@@ -1,7 +1,7 @@
 import ProtectedRoute from '@/components/common/ProtectedRoute';
+import RoleProtectedRoute from '@/components/common/RoleProtectedRoute';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import Courses from '@/pages/Courses';
-import Dashboard from '@/pages/Dashboard';
 import Instructors from '@/pages/Instructors';
 import Lectures from '@/pages/Lectures';
 import Login from '@/pages/Login';
@@ -18,13 +18,22 @@ function Body() {
                 <Route path='register' element={<Register />} />
 
                 <Route element={<ProtectedRoute />}>
-                    <Route path='/' element={<DashboardLayout />}>
-                        <Route path='' element={<Dashboard />} />
-                        <Route path='courses' element={<Courses />} />
-                        <Route path='instructors' element={<Instructors />} />
-                        <Route path='lectures' element={<Lectures />} />
+                    <Route element={<DashboardLayout />}>
+
+                        {/* ADMIN ONLY ROUTES */}
+                        <Route element={<RoleProtectedRoute allowedRoles={["admin"]} />}>
+                            <Route path="courses" element={<Courses />} />
+                            <Route path="instructors" element={<Instructors />} />
+                        </Route>
+
+                        {/* ADMIN + INSTRUCTOR ROUTES */}
+                        <Route element={<RoleProtectedRoute allowedRoles={["admin", "instructor"]} />}>
+                            <Route path="lectures" element={<Lectures />} />
+                        </Route>
+
                     </Route>
-                    <Route path='*' element={<NotFound />} />
+
+                    <Route path="*" element={<NotFound />} />
                 </Route>
             </>
         )

@@ -29,7 +29,7 @@ const Login = () => {
       // Save user to redux
       dispatch(getUser(res.data.loggedUser));
 
-      navigate("/");   // SAME FLOW AS SERVICE HUB
+      navigate("/instructors");   // SAME FLOW AS SERVICE HUB
       console.log("Login successful:", res);
       
     } catch (error) {
@@ -57,7 +57,7 @@ const Login = () => {
 
             <div className="space-y-2">
               <Label>Email</Label>
-              <Input value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <Input type={email} value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
 
             <div className="space-y-2">

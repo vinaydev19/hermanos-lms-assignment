@@ -1,17 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, Navigate } from "react-router-dom";
 import { useGetMeQuery } from "@/store/api/userApiSlice";
+import { useEffect } from "react";
+import { getUser } from "@/store/slices/userSlice";
 
 export default function ProtectedRoute() {
-  const user = useSelector((state) => state.user.user);
+  const reduxUser = useSelector((state) => state.user.user);
   const { data, isLoading, isError } = useGetMeQuery();
 
-  if (isLoading) {
-    return <div className="h-screen flex justify-center items-center">Loading...</div>;
-  }
+  const apiUser = data?.data?.user; // <── Correct API path
 
-  // if API says not logged in → redirect
-  if (isError || (!user && !data?.user)) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (apiUser) dispatch(getUser(apiUser));
+  }, [apiUser]);
+
+  if (isLoading)
+    return <div className="h-screen flex justify-center items-center">Loading...</div>;
+
+  // FAIL ONLY if BOTH API + Redux say user is missing
+  if (isError || (!reduxUser && !apiUser)) {
     return <Navigate to="/login" replace />;
   }
 
