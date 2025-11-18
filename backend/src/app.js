@@ -6,7 +6,7 @@ import { errorHandler } from "./middlewares/errorHandler.middleware.js"
 const app = express()
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    origin: process.env.CORS_ORIGIN || "https://hermanos-lms-assignment-n8v4.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
