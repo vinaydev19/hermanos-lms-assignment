@@ -8,7 +8,7 @@ export default function ProtectedRoute() {
   const reduxUser = useSelector((state) => state.user.user);
   const { data, isLoading, isError } = useGetMeQuery();
 
-  const apiUser = data?.data?.user; // <── Correct API path
+  const apiUser = data?.data?.user;
 
   const dispatch = useDispatch();
 
@@ -19,7 +19,6 @@ export default function ProtectedRoute() {
   if (isLoading)
     return <div className="h-screen flex justify-center items-center">Loading...</div>;
 
-  // FAIL ONLY if BOTH API + Redux say user is missing
   if (isError || (!reduxUser && !apiUser)) {
     return <Navigate to="/login" replace />;
   }

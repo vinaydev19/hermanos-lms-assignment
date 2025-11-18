@@ -20,13 +20,11 @@ function Body() {
                 <Route element={<ProtectedRoute />}>
                     <Route element={<DashboardLayout />}>
 
-                        {/* ADMIN ONLY ROUTES */}
                         <Route element={<RoleProtectedRoute allowedRoles={["admin"]} />}>
                             <Route path="courses" element={<Courses />} />
                             <Route path="instructors" element={<Instructors />} />
                         </Route>
 
-                        {/* ADMIN + INSTRUCTOR ROUTES */}
                         <Route element={<RoleProtectedRoute allowedRoles={["admin", "instructor"]} />}>
                             <Route path="lectures" element={<Lectures />} />
                         </Route>

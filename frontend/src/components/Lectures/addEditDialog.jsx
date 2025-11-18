@@ -70,7 +70,6 @@ const AddEditDialog = ({ open, onClose, mode, lecture }) => {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
 
-                    {/* Course */}
                     <div>
                         <Label>Course</Label>
                         <Select name="course" defaultValue={lecture?.course?._id}>
@@ -87,7 +86,6 @@ const AddEditDialog = ({ open, onClose, mode, lecture }) => {
                         </Select>
                     </div>
 
-                    {/* Instructor */}
                     <div>
                         <Label>Instructor</Label>
                         <Select name="instructor" defaultValue={lecture?.instructor?._id}>
@@ -104,7 +102,6 @@ const AddEditDialog = ({ open, onClose, mode, lecture }) => {
                         </Select>
                     </div>
 
-                    {/* Lecture Date */}
                     <div>
                         <Label>Date</Label>
                         <Input

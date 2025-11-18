@@ -40,7 +40,6 @@ const createLecture = asyncHandler(async (req, res, next) => {
 const getAllLectures = asyncHandler(async (req, res, next) => {
     let filter = {};
 
-    // If instructor is logged in, return only their lectures
     if (req.user.role === "instructor") {
         filter.instructor = req.user._id;
     }

@@ -26,11 +26,9 @@ const Login = () => {
 
       toast.success(res.message);
 
-      // Save user to redux
       dispatch(getUser(res.data.loggedUser));
 
-      navigate("/instructors");   // SAME FLOW AS SERVICE HUB
-      console.log("Login successful:", res);
+      navigate("/instructors"); 
       
     } catch (error) {
       toast.error(error?.data?.message || "Login failed");

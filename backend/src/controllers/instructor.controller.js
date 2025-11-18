@@ -37,9 +37,7 @@ const getAllInstructors = asyncHandler(async (req, res, next) => {
 
 const updateInstructor = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
-    const { name, email, password } = req.body;
-    console.log("Updating instructor:", id, name, email, password);
-        
+    const { name, email, password } = req.body;        
 
     if ([name, email, password].every(field =>
         field === undefined || field === null || field.toString().trim() === ''

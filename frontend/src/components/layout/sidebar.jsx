@@ -7,8 +7,6 @@ import { useLogoutUserMutation } from "@/store/api/userApiSlice";
 const Sidebar = () => {
   const user = useSelector((state) => state.user.user);
 
-  console.log("Sidebar User:", user);
-
   const [logoutUser] = useLogoutUserMutation();
 
   const handleLogout = async () => {
@@ -30,22 +28,18 @@ const Sidebar = () => {
     { to: "/lectures", icon: Calendar, label: "Lectures" },
   ];
 
-  // 🔥 Accurate dynamic menu based on login user role
   const links = user?.role === "admin" ? adminLinks : instructorLinks;
 
   return (
     <div className="w-64 h-screen flex flex-col bg-[#0D1424] text-[#E5E7EB]">
 
-      {/* Header */}
       <div className="p-6 border-b border-[#182033]">
         <h1 className="text-2xl font-bold">LMS Dashboard</h1>
 
-        {/* Show real user */}
         <p className="text-sm text-[#9CA3AF] mt-1">{user?.name}</p>
         <p className="text-xs text-[#6B7280] capitalize">{user?.role}</p>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2">
         {links.map((item) => (
           <NavLink
@@ -64,7 +58,6 @@ const Sidebar = () => {
         ))}
       </nav>
 
-      {/* Logout */}
       <div className="p-4 border-t border-[#182033] bg-[#0F1525]">
         <Button
           variant="ghost"

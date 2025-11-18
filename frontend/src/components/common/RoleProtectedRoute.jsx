@@ -6,10 +6,8 @@ export default function RoleProtectedRoute({ allowedRoles }) {
 
     if (!user) return <Navigate to="/login" replace />;
 
-    // If user role NOT allowed → block access
     if (!allowedRoles.includes(user.role)) {
         return <Navigate to="/lectures" replace />;
-        // instructor → redirect to lectures
     }
 
     return <Outlet />;

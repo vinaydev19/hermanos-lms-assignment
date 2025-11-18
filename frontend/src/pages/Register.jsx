@@ -48,7 +48,6 @@ const Register = () => {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
 
-            {/* Full Name */}
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
               <Input
@@ -61,7 +60,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Email */}
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -74,7 +72,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Password */}
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input
@@ -87,7 +84,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Role */}
             <div className="space-y-2">
               <Label>Role</Label>
               <Select value={role} onValueChange={setRole}>
@@ -102,7 +98,6 @@ const Register = () => {
               </Select>
             </div>
 
-            {/* Submit Button */}
             <Button
               type="submit"
               className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white"
@@ -112,7 +107,6 @@ const Register = () => {
             </Button>
           </form>
 
-          {/* Already have account */}
           <div className="mt-4 text-center text-sm text-muted-foreground">
             Already have an account?{' '}
             <Link to="/login" className="text-primary hover:underline">

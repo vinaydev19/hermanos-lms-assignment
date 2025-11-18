@@ -28,7 +28,6 @@ const AddEditDialog = ({ open, onClose, mode = "add", instructor }) => {
     const [createInstructor] = useCreateInstructorMutation();
     const [updateInstructor] = useUpdateInstructorMutation();
 
-    // fill form when editing
     useEffect(() => {
         if (mode === "edit" && instructor) {
             setForm({
@@ -58,7 +57,7 @@ const AddEditDialog = ({ open, onClose, mode = "add", instructor }) => {
                 toast.success("Instructor updated!");
             }
 
-            onClose(); // close dialog
+            onClose();
         } catch (err) {
             toast.error(err?.data?.message || "Something went wrong");
         }

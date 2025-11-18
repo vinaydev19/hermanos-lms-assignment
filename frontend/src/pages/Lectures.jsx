@@ -43,7 +43,6 @@ const Lectures = () => {
   return (
     <div className="space-y-6">
 
-      {/* Title */}
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-[#1F2937]">Lectures</h1>
@@ -59,7 +58,6 @@ const Lectures = () => {
         </Button>
       </div>
 
-      {/* Table */}
       <Card className="border border-[#E2E8F0] shadow-sm">
         <CardHeader>
           <CardTitle className="text-[#1F2937]">All Lectures</CardTitle>

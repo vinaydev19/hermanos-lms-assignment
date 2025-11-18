@@ -3,8 +3,6 @@ import { apiSlice } from "./apiSlice";
 
 export const courseApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-
-        // GET ALL COURSES
         getCourses: builder.query({
             query: () => COURSES_URL,
             providesTags: (result) =>
@@ -18,14 +16,10 @@ export const courseApiSlice = apiSlice.injectEndpoints({
                     ]
                     : [{ type: "Courses", id: "LIST" }],
         }),
-
-        // GET SINGLE
         getCourseById: builder.query({
             query: (id) => `${COURSES_URL}/${id}`,
             providesTags: (r, e, id) => [{ type: "Courses", id }],
         }),
-
-        // CREATE
         createCourse: builder.mutation({
             query: (formData) => ({
                 url: COURSES_URL,
@@ -34,8 +28,6 @@ export const courseApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: [{ type: "Courses", id: "LIST" }],
         }),
-
-        // UPDATE
         updateCourse: builder.mutation({
             query: ({ id, formData }) => ({
                 url: `${COURSES_URL}/${id}`,
@@ -47,8 +39,6 @@ export const courseApiSlice = apiSlice.injectEndpoints({
                 { type: "Courses", id: "LIST" },
             ],
         }),
-
-        // DELETE
         deleteCourse: builder.mutation({
             query: (id) => ({
                 url: `${COURSES_URL}/${id}`,

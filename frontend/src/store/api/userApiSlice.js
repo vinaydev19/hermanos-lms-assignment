@@ -20,7 +20,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
-                    dispatch(getUser(data.loggedUser)); // SAME AS SERVICE HUB
+                    dispatch(getUser(data.loggedUser));
                 } catch (err) {
                     console.error("Login failed:", err);
                 }
@@ -43,7 +43,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
-                    dispatch(getUser(data.user)); // RESTORE USER ON RELOAD
+                    dispatch(getUser(data.user));
                 } catch (err) {
                     console.error(err);
                 }

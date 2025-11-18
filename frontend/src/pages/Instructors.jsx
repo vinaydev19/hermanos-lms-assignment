@@ -59,7 +59,6 @@ const Instructors = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-[#1F2937]">Instructors</h1>
@@ -75,7 +74,6 @@ const Instructors = () => {
         </Button>
       </div>
 
-      {/* Table */}
       <Card className="border border-[#E2E8F0] shadow-sm">
         <CardHeader>
           <CardTitle className="text-[#1F2937]">All Instructors</CardTitle>
@@ -105,7 +103,6 @@ const Instructors = () => {
 
                     <TableCell className="text-right space-x-2">
 
-                      {/* EDIT */}
                       <Button
                         variant="ghost"
                         size="icon"
@@ -115,7 +112,6 @@ const Instructors = () => {
                         <Pencil className="w-4 h-4" />
                       </Button>
 
-                      {/* DELETE */}
                       <Button
                         variant="ghost"
                         size="icon"
@@ -134,7 +130,6 @@ const Instructors = () => {
         </CardContent>
       </Card>
 
-      {/* Add / Edit Dialog */}
       <AddEditDialog
         open={isDialogOpen}
         mode={dialogMode}
