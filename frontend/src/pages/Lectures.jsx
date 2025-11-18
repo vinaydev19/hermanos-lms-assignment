@@ -6,6 +6,7 @@ import { Plus, Pencil, Trash2 } from "lucide-react";
 import AddEditDialog from "@/components/Lectures/addEditDialog";
 import { useGetLecturesQuery, useDeleteLectureMutation } from "@/store/api/lectureApiSlice";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const Lectures = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -14,6 +15,9 @@ const Lectures = () => {
 
   const { data, isLoading } = useGetLecturesQuery();
   const [deleteLecture] = useDeleteLectureMutation();
+
+  const user = useSelector((state) => state.user.user);
+  const isInstructor = user?.role === "instructor";
 
   const lectures = data?.data?.lectures || [];
 
@@ -49,13 +53,15 @@ const Lectures = () => {
           <p className="text-[#6B7280]">Manage all lectures</p>
         </div>
 
-        <Button
-          onClick={openAdd}
-          className="bg-[#3B82F6] hover:bg-[#2563EB] text-white"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          Add Lecture
-        </Button>
+        {!isInstructor && (
+          <Button
+            onClick={openAdd}
+            className="bg-[#3B82F6] hover:bg-[#2563EB] text-white"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Add Lecture
+          </Button>
+        )}
       </div>
 
       <Card className="border border-[#E2E8F0] shadow-sm">
@@ -80,26 +86,30 @@ const Lectures = () => {
             <TableBody>
               {lectures.map((lec) => (
                 <TableRow key={lec._id} className="hover:bg-[#F1F5F9]">
-                  <TableCell className="font-medium">{lec.course?.name}</TableCell>
+                  <TableCell>{lec.course?.name}</TableCell>
                   <TableCell>{lec.instructor?.name}</TableCell>
                   <TableCell>{lec.date?.substring(0, 10)}</TableCell>
 
                   <TableCell className="text-right space-x-2">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => openEdit(lec)}
-                    >
-                      <Pencil className="w-4 h-4" />
-                    </Button>
+                    {!isInstructor && (
+                      <>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => openEdit(lec)}
+                        >
+                          <Pencil className="w-4 h-4" />
+                        </Button>
 
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleDelete(lec._id)}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(lec._id)}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
@@ -109,12 +119,14 @@ const Lectures = () => {
         </CardContent>
       </Card>
 
-      <AddEditDialog
-        open={isDialogOpen}
-        mode={dialogMode}
-        lecture={selectedLecture}
-        onClose={() => setIsDialogOpen(false)}
-      />
+      {!isInstructor && (
+        <AddEditDialog
+          open={isDialogOpen}
+          mode={dialogMode}
+          lecture={selectedLecture}
+          onClose={() => setIsDialogOpen(false)}
+        />
+      )}
     </div>
   );
 };
